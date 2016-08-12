@@ -56,7 +56,7 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}" Margin="34,0,0,36" ToolTipService.ToolTip="Esto es un tooltip"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}" Grid.ColumnSpan="2" Margin="14,0,16,40"/>
         </Grid>
-        <ProgressBar HorizontalAlignment="Left" Height="20"  Grid.Row="6"  Grid.Column="1" Margin="10,102,0,38" Width="1025"/>
+        <ProgressBar x:Name="progressBar" HorizontalAlignment="Left" Height="20"  Grid.Row="6"  Grid.Column="1" Margin="10,102,0,38" Width="1025"/>
         <StackPanel Grid.Column="2" Orientation="Vertical" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock TextWrapping="Wrap" Text="TextBlock" Style="{StaticResource SubheaderTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <ContentControl Content="ContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource EnemyTemplate}">
@@ -75,7 +75,7 @@
                     <GradientStop Color="#FF186800" Offset="1"/>
                 </LinearGradientBrush>
             </Canvas.Background>
-            <StackPanel x:Name="human" Orientation="Vertical" Width="11">
+            <StackPanel x:Name="human" Orientation="Vertical" Width="11" PointerPressed="human_PointerPressed">
                 <Ellipse Fill="White" Height="10" Stroke="Black" Width="10"/>
                 <Rectangle Fill="White" Height="25" Stroke="Black" Width="10"/>
             </StackPanel>

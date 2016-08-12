@@ -24,9 +24,47 @@ namespace App2
     public sealed partial class MainPage : App2.Common.LayoutAwarePage
     {
         Random random = new Random();
+        DispatcherTimer enemyTimer = new DispatcherTimer();
+        DispatcherTimer targetTimer = new DispatcherTimer();
+        bool humanCaptured = false;
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            enemyTimer.Tick += enemyTimer_Tick;
+            enemyTimer.Interval = TimeSpan.FromSeconds(2);
+            
+            targetTimer.Tick += targetTimer_Tick;
+            targetTimer.Interval = TimeSpan.FromSeconds(1);
+
+
+        }
+
+        private void targetTimer_Tick(object sender, object e)
+        {
+            progressBar.Value += 1;
+            if (progressBar.Value >= progressBar.Maximum)
+                EndTheGame();
+
+        }
+
+        private void EndTheGame()
+        {
+            if (!playArea.Children.Contains(gameOverText))
+            {
+                enemyTimer.Stop();
+                targetTimer.Stop();
+                humanCaptured = false;
+                BotonIniciar.Visibility = Visibility.Visible;
+                playArea.Children.Add(gameOverText);
+                
+            }
+        }
+
+        private void enemyTimer_Tick(object sender, object e)
+        {
+            AddEnemy();
         }
 
         /// <summary>
@@ -54,7 +92,21 @@ namespace App2
 
         private void BotonIniciar_Click(object sender, RoutedEventArgs e)
         {
+            StartGame();
             AddEnemy();
+        }
+
+        private void StartGame()
+        {
+            human.IsHitTestVisible = true;
+            humanCaptured = false;
+            progressBar.Value = 0;
+            BotonIniciar.Visibility = Visibility.Collapsed;
+            playArea.Children.Clear();
+            playArea.Children.Add(target);
+            playArea.Children.Add(human);
+            enemyTimer.Start();
+            targetTimer.Start();
         }
 
         private void AddEnemy()
@@ -81,6 +133,15 @@ namespace App2
             Storyboard.SetTargetProperty(animation, PropertyToAnimate);
             storyboard.Children.Add(animation);
             storyboard.Begin();
+        }
+
+        private void human_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (enemyTimer.IsEnabled)
+            {
+                humanCaptured = true;
+                human.IsHitTestVisible = false;
+            }
         }
 
        
