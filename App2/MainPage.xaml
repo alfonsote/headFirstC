@@ -47,7 +47,7 @@
         </Grid.RowDefinitions>
 
         <!-- Back button and page title -->
-        <Grid Grid.RowSpan="3" Grid.ColumnSpan="3">
+        <Grid x:Name="grid" Grid.RowSpan="3" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="489"/>
@@ -68,7 +68,7 @@
                 </ContentControl.Background>
             </ContentControl>
         </StackPanel>
-        <Canvas x:Name="playArea" Grid.Column="1" Grid.Row="4" Margin="0,9,0,8">
+        <Canvas x:Name="playArea" Grid.Column="1" Grid.Row="4" Margin="0,9,0,8" PointerMoved="playArea_PointerMoved" PointerExited="playArea_PointerExited">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF3AFF00"/>
@@ -80,7 +80,7 @@
                 <Rectangle Fill="White" Height="25" Stroke="Black" Width="10"/>
             </StackPanel>
             <TextBlock x:Name="gameOverText" TextWrapping="Wrap" Text="Game Over" FontWeight="Bold" FontSize="100" FontStyle="Italic" Foreground="Black" Canvas.Left="265" Canvas.Top="161"/>
-            <Rectangle x:Name="target" Height="50" Stroke="Black" Width="50" RenderTransformOrigin="0.5,0.5" Canvas.Left="670" Canvas.Top="116" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Rectangle x:Name="target" Height="50" Stroke="Black" Width="50" RenderTransformOrigin="0.5,0.5" Canvas.Left="670" Canvas.Top="116" UseLayoutRounding="False" d:LayoutRounding="Auto" PointerEntered="target_PointerEntered">
                 <Rectangle.RenderTransform>
                     <CompositeTransform Rotation="45"/>
                 </Rectangle.RenderTransform>
